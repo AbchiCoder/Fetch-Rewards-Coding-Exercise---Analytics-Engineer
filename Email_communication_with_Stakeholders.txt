@@ -1,0 +1,30 @@
+Subject: Users, Brands and Receipts files Data Quality Issues – Key Findings & Questions
+
+Hi Product/Business Leader,
+I have been analyzing the users, brands and receipts files we get on a regular basis, and I’ve uncovered several data issues that may impact our insights. I wanted to highlight some key findings and ask a few questions to help us ensure the accuracy and reliability of our reporting.
+    1. Test records in the brand file:
+        - I see about 432 brand names with “TEST” on them. Are we expecting any test data to be loaded with the brands file? If so, do we want to filter them out or flag them?
+
+    2. Missing and/or inconsistent data:
+        - I noticed some receipts are missing the purchase date, and in some cases, the date and time between the records appear to be out of order. For example, the purchase date recorded is after the receipt was scanned. Should we exclude these records or try to infer missing values? If inference, is there any logic you recommend we should apply?
+
+    3. Duplicate and/or orphaned records:
+        - I found duplicate records on the files sent. Are duplicates expected on our records (e.g. if someone resubmits receipts)? Should we deduplicate or flag them?
+        - There are also usersId in the receipt file that are not in the users file. Are all the users supposed to be in the users file? If not, where would we get the missing users from?
+        - I can see some receiptItems in the rewardsReceiptItemList column in the receipt object that do not have a corresponding receipt Id. How do we handle receiptItems with no corresponding Receipt Id? My understanding is that ReceiptItem should be the child of the receipt object. Is this accurate?
+
+    4. Barcode matching issues:
+        - Barcode in receipts don’t always match our brand’s barcode correctly, leading to potential misattribution of transactions. Should we rely on other fields like brandCode instead of barcode? Could we please validate the barcode mappings at ingestion?
+        - I also found that one barcode corresponds to multiple brand names or descriptions. Should barcodes be unique per brand name? If not, how do we specify which product has which barcode?
+
+    5. Outlier transactions:
+        - Some users have an unusually high number of receipts scanned in a short period of time. This could indicate bulk uploads, fraud, or edge cases in the behaviour of the user. Do we have a threshold for flagging unusually high activities? Should we remove extreme outliers?
+
+Could I get more historical context on how data inconsistencies have been handled before? Any inputs on how to balance accuracy vs. completeness when handling imperfect data would be very helpful.
+
+Looking ahead, we may need to refine how data is structured at the source if we want to optimize reporting and insights. As we scale, performance concerns will arise with increasing data volume. Therefore, using more efficient joins and implementing strategies to clean up the source data would keep the queries fast in production.
+
+Please let me know if you would like to discuss the topics mentioned above and align on the next steps. 
+
+Best Regards,
+Christian Abchi.
