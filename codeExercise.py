@@ -118,6 +118,8 @@ con.execute("CREATE TABLE brands AS SELECT * FROM brands_df")
 con.execute("CREATE TABLE receipts AS SELECT * FROM receipts_df")
 con.execute("CREATE TABLE receiptItems AS SELECT * FROM ReceiptItem_df")
 
+print("SECOND:  Queries that directly answer predetermined questions from a business stakeholder")
+print() #New Line
 
 ## What are the top 5 brands by receipts scanned for most recent month?
 
@@ -438,7 +440,8 @@ print() ### New Line
 
 
 ############# Third: Evaluate Data Quality Issues in the Data Provided
-
+print("THRID: Data Quality Issues in the Data Provided")
+print() #New Line
 # Using the programming language of your choice (SQL, Python, R, Bash, etc...) identify as many data quality issues as you can. 
 # We are not expecting a full blown review of all the data provided, but instead want to know how you explore and evaluate data of questionable provenance.
 
